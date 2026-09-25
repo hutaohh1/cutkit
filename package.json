@@ -1,0 +1,31 @@
+{
+  "name": "cutkit",
+  "version": "0.2.0",
+  "private": false,
+  "description": "Replayable, auditable video production orchestration with FFmpeg rendering, captions, QC, provenance, and revision tracking.",
+  "license": "MIT",
+  "keywords": ["video", "ffmpeg", "captions", "timeline", "provenance", "qc", "cli"],
+  "type": "module",
+  "bin": {
+    "cutkit": "./src/cli.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/cli.mjs && node --check src/index.mjs && node --check src/workflow.mjs && node --check src/workflow-schema.mjs && node --check src/material-policy.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "dependencies": {
+    "@contentauth/c2pa-node": "^0.9.7",
+    "fast-xml-parser": "^5.11.1",
+    "ffmpeg-static": "^5.3.0",
+    "ffprobe-static": "^3.1.0"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}

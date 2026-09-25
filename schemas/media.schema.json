@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/media.schema.json",
+  "title": "CutKit Media Asset",
+  "type": "object",
+  "required": ["schemaVersion", "assetId", "sourceUri", "sourceHash", "mediaKind", "durationMs", "width", "height", "fps", "hasAudio", "colorProfile", "provenance"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "assetId": { "type": "string", "pattern": "^asset_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "sourceUri": { "type": "string", "minLength": 1 },
+    "sourceHash": { "type": "string", "pattern": "^sha256:" },
+    "mediaKind": { "enum": ["video", "audio", "image", "graphic", "caption", "effect"] },
+    "durationMs": { "type": "integer", "minimum": 0 },
+    "width": { "type": "integer", "minimum": 0 },
+    "height": { "type": "integer", "minimum": 0 },
+    "fps": { "type": "number", "exclusiveMinimum": 0 },
+    "hasAudio": { "type": "boolean" },
+    "colorProfile": { "type": "string", "minLength": 1 },
+    "provenance": { "type": "object" }
+  }
+}

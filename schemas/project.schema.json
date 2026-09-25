@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/project.schema.json",
+  "title": "CutKit Project Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "projectId", "state", "timelineFile", "lockFile", "eventLog", "historyDir"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "projectId": { "type": "string", "pattern": "^project_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "state": {
+      "enum": ["DRAFT", "INGESTING", "INDEXED", "PLANNING", "MATERIAL_CHECK", "BUILDING", "RENDERING", "REVIEW_REQUIRED", "REVISING", "READY_FOR_APPROVAL", "APPROVED", "FINALIZED", "FAILED", "BLOCKED"]
+    },
+    "timelineRevision": { "type": "integer", "minimum": 0 },
+    "fps": { "type": "number", "exclusiveMinimum": 0 },
+    "resolution": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "integer", "minimum": 1 }
+    },
+    "audioSampleRate": { "type": "integer", "minimum": 1 },
+    "timelineFile": { "type": "string", "minLength": 1 },
+    "lockFile": { "type": "string", "minLength": 1 },
+    "eventLog": { "type": "string", "minLength": 1 },
+    "historyDir": { "type": "string", "minLength": 1 },
+    "intentFile": { "type": "string", "minLength": 1 },
+    "assetFile": { "type": "string", "minLength": 1 },
+    "candidateFile": { "type": "string", "minLength": 1 },
+    "gapDir": { "type": "string", "minLength": 1 },
+    "reviewDir": { "type": "string", "minLength": 1 },
+    "patchDir": { "type": "string", "minLength": 1 },
+    "forgeDir": { "type": "string", "minLength": 1 },
+    "reportDir": { "type": "string", "minLength": 1 },
+    "renderDir": { "type": "string", "minLength": 1 },
+    "finalDir": { "type": "string", "minLength": 1 },
+    "currentTimeline": { "type": "string", "minLength": 1 },
+    "lastRender": { "type": ["string", "null"] },
+    "lastAudit": { "type": ["string", "null"] },
+    "contentHash": { "type": "string", "pattern": "^sha256:" },
+    "createdAt": { "type": ["string", "integer"] },
+    "updatedAt": { "type": ["string", "integer"] }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/rights.schema.json",
+  "title": "CutKit Rights Record",
+  "type": "object",
+  "required": ["rightsId", "assetId", "license", "usage", "territory", "allowedUses", "prohibitedUses"],
+  "properties": {
+    "rightsId": { "type": "string", "pattern": "^rights_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "assetId": { "type": "string", "pattern": "^asset_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "license": { "type": "string", "minLength": 1 },
+    "usage": { "enum": ["edit", "publish", "internal", "archive"] },
+    "territory": { "type": "string", "minLength": 1 },
+    "validFrom": { "type": "integer" },
+    "validUntil": { "type": "integer" },
+    "allowedUses": { "type": "array", "items": { "type": "string" } },
+    "prohibitedUses": { "type": "array", "items": { "type": "string" } },
+    "proofRefs": { "type": "array", "items": { "type": "string" } }
+  }
+}

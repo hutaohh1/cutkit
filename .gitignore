@@ -1,0 +1,14 @@
+node_modules/
+.tmp/
+renders/
+deliverables/
+新建文件夹/
+dist/
+coverage/
+.env
+.env.*
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db

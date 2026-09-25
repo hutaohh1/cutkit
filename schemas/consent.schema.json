@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/consent.schema.json",
+  "title": "CutKit Consent Record",
+  "type": "object",
+  "required": ["consentId", "assetId", "subjectType", "subjectRef", "status", "scope"],
+  "properties": {
+    "consentId": { "type": "string", "pattern": "^consent_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "assetId": { "type": "string", "pattern": "^asset_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "subjectType": { "enum": ["person", "voice", "brand", "location", "none"] },
+    "subjectRef": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["granted", "denied", "expired", "not_required"] },
+    "scope": { "type": "array", "items": { "type": "string" } },
+    "expiresAt": { "type": "integer" },
+    "proofRef": { "type": "string" }
+  }
+}

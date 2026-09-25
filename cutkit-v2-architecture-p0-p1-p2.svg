@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2980" viewBox="0 0 1800 2980">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+<rect width="1800" height="2980" fill="#0b0f14"/>
+<text x="60" y="72" fill="#f8fafc" font-size="42" font-weight="500">CutKit v2.0 P0 / P1 / P2 完整架构总图</text>
+<text x="60" y="108" fill="#94a3b8" font-size="21">面向 Codex 的本地优先剪辑引擎 · 五层架构 · 制作闭环 · 来源治理与编辑器交换</text>
+<rect x="60" y="140" width="1680" height="180" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="84" y="178" fill="#94a3b8" font-size="24" font-weight="500">一、目标与硬约束</text>
+<rect x="100" y="198" width="760" height="92" rx="14" fill="#172033" stroke="#64748b" stroke-width="2"/>
+<text x="480" y="229" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">A1 本地 CLI 垂直切片</text>
+<text x="480" y="260" text-anchor="middle" fill="#cbd5e1" font-size="18">P0 编辑协议 · P1 真实媒体执行 · P2 来源治理与交换</text>
+<rect x="920" y="198" width="760" height="92" rx="14" fill="#172033" stroke="#64748b" stroke-width="2"/>
+<text x="1300" y="229" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">产品硬约束</text>
+<text x="1300" y="260" text-anchor="middle" fill="#cbd5e1" font-size="18">timeline.json 唯一执行真相 · 原片只读 · 不默认上传 · C2PA 可验证</text>
+<rect x="60" y="350" width="1680" height="260" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="84" y="388" fill="#94a3b8" font-size="24" font-weight="500">二、核心数据</text>
+<rect x="95" y="425" width="370" height="145" rx="14" fill="#102a36" stroke="#38bdf8" stroke-width="2"/>
+<text x="280" y="456" text-anchor="middle" fill="#e0f2fe" font-size="22" font-weight="500">capability registry</text>
+<text x="280" y="487" text-anchor="middle" fill="#cbd5e1" font-size="18">documented / verified / missing</text>
+<text x="280" y="515" text-anchor="middle" fill="#cbd5e1" font-size="18">native_editable / source_rebuildable</text>
+<rect x="495" y="425" width="370" height="145" rx="14" fill="#102a36" stroke="#38bdf8" stroke-width="2"/>
+<text x="680" y="456" text-anchor="middle" fill="#e0f2fe" font-size="22" font-weight="500">timeline.json</text>
+<text x="680" y="487" text-anchor="middle" fill="#cbd5e1" font-size="18">源区间 ≠ 时间线区间</text>
+<text x="680" y="515" text-anchor="middle" fill="#cbd5e1" font-size="18">speed / time_map / audio_policy</text>
+<rect x="895" y="425" width="370" height="145" rx="14" fill="#102a36" stroke="#38bdf8" stroke-width="2"/>
+<text x="1080" y="456" text-anchor="middle" fill="#e0f2fe" font-size="22" font-weight="500">intent.json</text>
+<text x="1080" y="487" text-anchor="middle" fill="#cbd5e1" font-size="18">目标 / 风格 / must_include</text>
+<text x="1080" y="515" text-anchor="middle" fill="#cbd5e1" font-size="18">avoid / 结构模板 / seed</text>
+<rect x="1295" y="425" width="370" height="145" rx="14" fill="#102a36" stroke="#38bdf8" stroke-width="2"/>
+<text x="1480" y="456" text-anchor="middle" fill="#e0f2fe" font-size="22" font-weight="500">history / events</text>
+<text x="1480" y="487" text-anchor="middle" fill="#cbd5e1" font-size="18">不可变 revision 快照</text>
+<text x="1480" y="515" text-anchor="middle" fill="#cbd5e1" font-size="18">因果审计</text>
+<rect x="60" y="650" width="1680" height="520" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="84" y="688" fill="#94a3b8" font-size="24" font-weight="500">三、P0 编辑协议与 P1 真实媒体执行</text>
+<rect x="95" y="715" width="780" height="415" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="119" y="753" fill="#94a3b8" font-size="24" font-weight="500">P0 已实现</text>
+<rect x="125" y="775" width="340" height="82" rx="14" fill="#123326" stroke="#34d399" stroke-width="2"/>
+<text x="295" y="806" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">JSON Schema</text>
+<text x="295" y="837" text-anchor="middle" fill="#cbd5e1" font-size="18">timeline / patch / lock / project</text>
+<rect x="505" y="775" width="340" height="82" rx="14" fill="#123326" stroke="#34d399" stroke-width="2"/>
+<text x="675" y="806" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">UUIDv7 稳定 ID</text>
+<text x="675" y="837" text-anchor="middle" fill="#cbd5e1" font-size="18">timeline / track / clip / asset / lock</text>
+<rect x="125" y="875" width="340" height="82" rx="14" fill="#123326" stroke="#34d399" stroke-width="2"/>
+<text x="295" y="906" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">RFC 6902 Patch</text>
+<text x="295" y="937" text-anchor="middle" fill="#cbd5e1" font-size="18">add / remove / replace / move / copy / test</text>
+<rect x="505" y="875" width="340" height="82" rx="14" fill="#123326" stroke="#34d399" stroke-width="2"/>
+<text x="675" y="906" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">属性级锁</text>
+<text x="675" y="937" text-anchor="middle" fill="#cbd5e1" font-size="18">路径锁 + objectId 锁 · TTL</text>
+<rect x="125" y="975" width="340" height="82" rx="14" fill="#123326" stroke="#34d399" stroke-width="2"/>
+<text x="295" y="1006" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">乐观并发</text>
+<text x="295" y="1037" text-anchor="middle" fill="#cbd5e1" font-size="18">base_revision · REVISION_CONFLICT</text>
+<rect x="505" y="975" width="340" height="82" rx="14" fill="#123326" stroke="#34d399" stroke-width="2"/>
+<text x="675" y="1006" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">原子写入</text>
+<text x="675" y="1037" text-anchor="middle" fill="#cbd5e1" font-size="18">history / events / timeline.json</text>
+<rect x="925" y="715" width="780" height="415" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="949" y="753" fill="#94a3b8" font-size="24" font-weight="500">P1 已实现</text>
+<rect x="955" y="775" width="340" height="82" rx="14" fill="#173b24" stroke="#4ade80" stroke-width="3"/>
+<text x="1125" y="806" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">ffprobe 媒体探测</text>
+<text x="1125" y="837" text-anchor="middle" fill="#cbd5e1" font-size="18">SHA-256 / duration / fps / audio</text>
+<rect x="1335" y="775" width="340" height="82" rx="14" fill="#173b24" stroke="#4ade80" stroke-width="3"/>
+<text x="1505" y="806" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">Caption → ASS → libass</text>
+<text x="1505" y="837" text-anchor="middle" fill="#cbd5e1" font-size="18">重叠 / 阅读速度 / 行长 QC</text>
+<rect x="955" y="875" width="340" height="82" rx="14" fill="#173b24" stroke="#4ade80" stroke-width="3"/>
+<text x="1125" y="906" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">真实音频 QC</text>
+<text x="1125" y="937" text-anchor="middle" fill="#cbd5e1" font-size="18">ebur128 / astats / volume / silence</text>
+<rect x="1335" y="875" width="340" height="82" rx="14" fill="#173b24" stroke="#4ade80" stroke-width="3"/>
+<text x="1505" y="906" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">真实 FFmpeg Render</text>
+<text x="1505" y="937" text-anchor="middle" fill="#cbd5e1" font-size="18">trim / speed / fade / concat</text>
+<rect x="955" y="975" width="720" height="82" rx="14" fill="#173b24" stroke="#4ade80" stroke-width="3"/>
+<text x="1315" y="1006" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">RenderPlan + renderHash + outputHash</text>
+<text x="1315" y="1037" text-anchor="middle" fill="#cbd5e1" font-size="18">editHash / render manifest / 真实 MP4 输出</text>
+<rect x="60" y="1210" width="1680" height="820" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="84" y="1248" fill="#94a3b8" font-size="24" font-weight="500">四、五层架构与制作闭环</text>
+<rect x="95" y="1280" width="430" height="690" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="119" y="1318" fill="#94a3b8" font-size="24" font-weight="500">五层架构</text>
+<rect x="125" y="1340" width="370" height="88" rx="14" fill="#172033" stroke="#818cf8" stroke-width="2"/>
+<text x="310" y="1371" text-anchor="middle" fill="#e0e7ff" font-size="22" font-weight="500">L1 入口层</text>
+<text x="310" y="1402" text-anchor="middle" fill="#cbd5e1" font-size="18">Skill + CLI / MCP · 同构同错误码</text>
+<rect x="125" y="1455" width="370" height="88" rx="14" fill="#172033" stroke="#818cf8" stroke-width="2"/>
+<text x="310" y="1486" text-anchor="middle" fill="#e0e7ff" font-size="22" font-weight="500">L2 CutKit Core</text>
+<text x="310" y="1517" text-anchor="middle" fill="#cbd5e1" font-size="18">Application Service · 状态 / 权限 / 校验</text>
+<rect x="125" y="1570" width="370" height="88" rx="14" fill="#172033" stroke="#818cf8" stroke-width="2"/>
+<text x="310" y="1601" text-anchor="middle" fill="#e0e7ff" font-size="22" font-weight="500">L3 Registry</text>
+<text x="310" y="1632" text-anchor="middle" fill="#cbd5e1" font-size="18">Effects / Motion / Text / Audio / Assets</text>
+<rect x="125" y="1685" width="370" height="88" rx="14" fill="#172033" stroke="#818cf8" stroke-width="2"/>
+<text x="310" y="1716" text-anchor="middle" fill="#e0e7ff" font-size="22" font-weight="500">L4 Render Plan</text>
+<text x="310" y="1747" text-anchor="middle" fill="#cbd5e1" font-size="18">媒体处理 + 局部动画 + Render 三路径</text>
+<rect x="125" y="1800" width="370" height="88" rx="14" fill="#172033" stroke="#818cf8" stroke-width="2"/>
+<text x="310" y="1831" text-anchor="middle" fill="#e0e7ff" font-size="22" font-weight="500">L5 Review &amp; Delivery</text>
+<text x="310" y="1862" text-anchor="middle" fill="#cbd5e1" font-size="18">试片 → Patch → 批准 → 终稿</text>
+<rect x="565" y="1280" width="1140" height="690" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="589" y="1318" fill="#94a3b8" font-size="24" font-weight="500">制作闭环</text>
+<rect x="605" y="1340" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="720" y="1371" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">需求与素材</text>
+<text x="720" y="1402" text-anchor="middle" fill="#cbd5e1" font-size="18"></text>
+<rect x="605" y="1430" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="720" y="1461" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">doctor</text>
+<text x="720" y="1492" text-anchor="middle" fill="#cbd5e1" font-size="18">环境 / 权限 / 能力</text>
+<rect x="605" y="1520" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="720" y="1551" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">素材登记</text>
+<text x="720" y="1582" text-anchor="middle" fill="#cbd5e1" font-size="18">按需分析</text>
+<rect x="605" y="1610" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="720" y="1641" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">候选库</text>
+<text x="720" y="1672" text-anchor="middle" fill="#cbd5e1" font-size="18">叙事 / 声音 / 连续性</text>
+<rect x="605" y="1700" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="720" y="1731" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">叙事计划</text>
+<text x="720" y="1762" text-anchor="middle" fill="#cbd5e1" font-size="18">speech / music / action</text>
+<rect x="605" y="1810" width="230" height="78" rx="14" fill="#3a2418" stroke="#f97316" stroke-width="2"/>
+<text x="720" y="1841" text-anchor="middle" fill="#ffedd5" font-size="22" font-weight="500">素材覆盖 Gate</text>
+<text x="720" y="1872" text-anchor="middle" fill="#cbd5e1" font-size="18">通过 / 缺失</text>
+<rect x="875" y="1810" width="300" height="78" rx="14" fill="#401c24" stroke="#f43f5e" stroke-width="2"/>
+<text x="1025" y="1841" text-anchor="middle" fill="#ffe4e6" font-size="22" font-weight="500">缺口码</text>
+<text x="1025" y="1872" text-anchor="middle" fill="#cbd5e1" font-size="18">MISSING_REAL / VOICEOVER</text>
+<text x="1025" y="1900" text-anchor="middle" fill="#cbd5e1" font-size="18">MISSING_MUSIC / STYLE_ASSET</text>
+<rect x="1210" y="1700" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="1325" y="1731" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">Timeline Build</text>
+<text x="1325" y="1762" text-anchor="middle" fill="#cbd5e1" font-size="18">timeline.json</text>
+<rect x="1210" y="1610" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="1325" y="1641" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">工程校验</text>
+<text x="1325" y="1672" text-anchor="middle" fill="#cbd5e1" font-size="18">权限 / 契约</text>
+<rect x="1210" y="1520" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="1325" y="1551" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">Preview</text>
+<text x="1325" y="1582" text-anchor="middle" fill="#cbd5e1" font-size="18">revision + style</text>
+<rect x="1210" y="1430" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="1325" y="1461" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">实际视听评审</text>
+<text x="1325" y="1492" text-anchor="middle" fill="#cbd5e1" font-size="18">工程 / 视听 / 人确认</text>
+<rect x="920" y="1340" width="230" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="1035" y="1371" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">问题单 + Patch</text>
+<text x="1035" y="1402" text-anchor="middle" fill="#cbd5e1" font-size="18">定位 / 证据 / 锁</text>
+<rect x="1450" y="1340" width="210" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="1555" y="1371" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">批准快照</text>
+<text x="1555" y="1402" text-anchor="middle" fill="#cbd5e1" font-size="18">revision + deps</text>
+<rect x="1450" y="1430" width="210" height="64" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="1555" y="1461" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">终稿交付</text>
+<text x="1555" y="1492" text-anchor="middle" fill="#cbd5e1" font-size="18"></text>
+<rect x="60" y="2070" width="1680" height="230" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="84" y="2108" fill="#94a3b8" font-size="24" font-weight="500">五、返回层对照</text>
+<rect x="95" y="2140" width="245" height="105" rx="14" fill="#26233b" stroke="#a78bfa" stroke-width="2"/>
+<text x="217.5" y="2171" text-anchor="middle" fill="#ede9fe" font-size="22" font-weight="500">字体缺字 / 换行</text>
+<text x="217.5" y="2202" text-anchor="middle" fill="#cbd5e1" font-size="18">→ 字体排版</text>
+<rect x="365" y="2140" width="245" height="105" rx="14" fill="#26233b" stroke="#a78bfa" stroke-width="2"/>
+<text x="487.5" y="2171" text-anchor="middle" fill="#ede9fe" font-size="22" font-weight="500">表达不清</text>
+<text x="487.5" y="2202" text-anchor="middle" fill="#cbd5e1" font-size="18">→ 叙事计划</text>
+<rect x="635" y="2140" width="245" height="105" rx="14" fill="#26233b" stroke="#a78bfa" stroke-width="2"/>
+<text x="757.5" y="2171" text-anchor="middle" fill="#ede9fe" font-size="22" font-weight="500">导出崩溃</text>
+<text x="757.5" y="2202" text-anchor="middle" fill="#cbd5e1" font-size="18">→ 渲染与环境诊断</text>
+<rect x="905" y="2140" width="245" height="105" rx="14" fill="#26233b" stroke="#a78bfa" stroke-width="2"/>
+<text x="1027.5" y="2171" text-anchor="middle" fill="#ede9fe" font-size="22" font-weight="500">选错 / 重复</text>
+<text x="1027.5" y="2202" text-anchor="middle" fill="#cbd5e1" font-size="18">→ 候选与组剪</text>
+<rect x="1175" y="2140" width="245" height="105" rx="14" fill="#26233b" stroke="#a78bfa" stroke-width="2"/>
+<text x="1297.5" y="2171" text-anchor="middle" fill="#ede9fe" font-size="22" font-weight="500">bad_cut</text>
+<text x="1297.5" y="2202" text-anchor="middle" fill="#cbd5e1" font-size="18">→ 时间线</text>
+<rect x="1445" y="2140" width="245" height="105" rx="14" fill="#26233b" stroke="#a78bfa" stroke-width="2"/>
+<text x="1567.5" y="2171" text-anchor="middle" fill="#ede9fe" font-size="22" font-weight="500">BGM 压人声</text>
+<text x="1567.5" y="2202" text-anchor="middle" fill="#cbd5e1" font-size="18">→ 自动化混音</text>
+<rect x="60" y="2340" width="1680" height="360" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="84" y="2378" fill="#94a3b8" font-size="24" font-weight="500">六、创作能力、来源治理与编辑器交换</text>
+<rect x="100" y="2410" width="380" height="220" rx="14" fill="#20252d" stroke="#64748b" stroke-width="2"/>
+<text x="290" y="2441" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="500">概念拆分</text>
+<text x="290" y="2472" text-anchor="middle" fill="#cbd5e1" font-size="18">Effect / Transition / Motion</text>
+<text x="290" y="2500" text-anchor="middle" fill="#cbd5e1" font-size="18">Overlay / Compositing / Audio</text>
+<rect x="520" y="2410" width="380" height="220" rx="14" fill="#3a2418" stroke="#fb923c" stroke-width="2"/>
+<text x="710" y="2441" text-anchor="middle" fill="#ffedd5" font-size="22" font-weight="500">Provenance / Rights / Consent</text>
+<text x="710" y="2472" text-anchor="middle" fill="#cbd5e1" font-size="18">source hash · generation · edits</text>
+<text x="710" y="2500" text-anchor="middle" fill="#cbd5e1" font-size="18">rights / consent / disclosure</text>
+<rect x="940" y="2410" width="380" height="220" rx="14" fill="#3a2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1130" y="2441" text-anchor="middle" fill="#ffedd5" font-size="22" font-weight="500">C2PA sign / verify</text>
+<text x="1130" y="2472" text-anchor="middle" fill="#cbd5e1" font-size="18">ES256 LocalSigner</text>
+<text x="1130" y="2500" text-anchor="middle" fill="#cbd5e1" font-size="18">org.cutkit.provenance</text>
+<text x="1130" y="2528" text-anchor="middle" fill="#cbd5e1" font-size="18">trust warning / critical failure</text>
+<rect x="1360" y="2410" width="340" height="220" rx="14" fill="#3a2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1530" y="2441" text-anchor="middle" fill="#ffedd5" font-size="22" font-weight="500">OTIO / EDL / FCPXML + Handoff</text>
+<text x="1530" y="2472" text-anchor="middle" fill="#cbd5e1" font-size="18">Timeline.1 / Track.1 / Clip.1</text>
+<text x="1530" y="2500" text-anchor="middle" fill="#cbd5e1" font-size="18">payload hash · baseRevision</text>
+<text x="1530" y="2528" text-anchor="middle" fill="#cbd5e1" font-size="18">round-trip loss report</text>
+<rect x="60" y="2740" width="1680" height="180" rx="18" fill="#111827" stroke="#334155" stroke-width="2"/>
+<text x="84" y="2778" fill="#94a3b8" font-size="24" font-weight="500">七、后续优先级与生产化</text>
+<rect x="110" y="2805" width="720" height="85" rx="14" fill="#173b24" stroke="#4ade80" stroke-width="3"/>
+<text x="470" y="2836" text-anchor="middle" fill="#dcfce7" font-size="22" font-weight="500">P1 收尾</text>
+<text x="470" y="2867" text-anchor="middle" fill="#cbd5e1" font-size="18">xfade / 多层 compositor · Remotion / HyperFrames</text>
+<rect x="970" y="2805" width="720" height="85" rx="14" fill="#3a2418" stroke="#fb923c" stroke-width="2"/>
+<text x="1330" y="2836" text-anchor="middle" fill="#ffedd5" font-size="22" font-weight="500">P2 生产化</text>
+<text x="1330" y="2867" text-anchor="middle" fill="#cbd5e1" font-size="18">TSA / key custody / trust anchors · golden exchange fixtures</text>
+<path d="M 880 290 L 880 350" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1280 290 L 1280 350" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 280 570 L 280 650" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 680 570 L 680 650" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1080 570 L 1080 650" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1480 570 L 1480 650" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 315 1505 L 315 1570" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 315 1658 L 315 1685" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 315 1773 L 315 1800" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 720 1404 L 720 1430" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 720 1494 L 720 1520" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 720 1584 L 720 1610" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 720 1674 L 720 1700" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 720 1764 L 720 1810" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="728" y="1802" fill="#94a3b8" font-size="16">缺失</text>
+<path d="M 835 1848 L 875 1848" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1175 1848 L 1210 1732" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1218" y="1724" fill="#94a3b8" font-size="16">通过</text>
+<path d="M 1325 1700 L 1325 1674" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1325 1610 L 1325 1584" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1325 1520 L 1325 1494" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1325 1430 L 1215 1372" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1223" y="1364" fill="#94a3b8" font-size="16">需修改</text>
+<path d="M 1150 1372 L 1210 1700" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1218" y="1692" fill="#94a3b8" font-size="16">base_revision + Patch</text>
+<path d="M 1325 1430 L 1450 1372" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1458" y="1364" fill="#94a3b8" font-size="16">通过</text>
+<path d="M 1555 1404 L 1555 1430" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 315 1888 L 315 1980" fill="none" stroke="#34d399" stroke-width="2" />
+<path d="M 1325 1494 L 1325 1225 L 420 1225" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="8 8"/>
+<path d="M 1050 2200 L 1050 2260 L 530 2260 L 530 2410" fill="none" stroke="#a78bfa" stroke-width="2" />
+<path d="M 1325 2035 L 1325 2140" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 485 1130 L 485 1210" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1315 1130 L 1315 1210" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

@@ -1,0 +1,35 @@
+[
+  {
+    "assetId": "asset_01a0d901-8a8e-7889-8c01-2e9ec58d7655",
+    "kind": "REAL",
+    "synthetic": false,
+    "uri": "sources/interview.mp4",
+    "contentHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "roles": ["founder_interview"],
+    "allowedRoles": [],
+    "prohibitedRoles": [],
+    "media": { "durationMs": 20000, "fps": 30, "width": 1920, "height": 1080, "hasAudio": false },
+    "rights": { "status": "cleared", "license": "internal", "consentRefs": ["consent_founder"] },
+    "provenance": { "source": "camera_card", "ingestedAt": "2026-09-25T10:00:00+08:00" }
+  },
+  {
+    "assetId": "asset_01a0d901-8a8e-7f43-a843-fcd13e02e5b5",
+    "kind": "SYNTHETIC_PROCEDURAL",
+    "synthetic": true,
+    "uri": "cache/forge/particles.webm",
+    "contentHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "roles": ["transition"],
+    "allowedRoles": ["transition", "graphic_texture"],
+    "prohibitedRoles": ["person", "place", "product", "evidence", "testimony", "event", "identity"],
+    "media": { "durationMs": 5000, "fps": 30, "width": 1920, "height": 1080, "hasAudio": false },
+    "rights": { "status": "cleared", "license": "project-generated", "consentRefs": [] },
+    "provenance": {
+      "source": "material_forge",
+      "ingestedAt": "2026-09-25T10:00:00+08:00",
+      "method": "procedural",
+      "tool": "cutkit-forge-a",
+      "recipeHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "parameters": { "seed": 731922, "durationMs": 2000 }
+    }
+  }
+]

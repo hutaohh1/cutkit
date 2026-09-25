@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/timeline.schema.json",
+  "title": "CutKit Timeline",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "timelineId", "revision", "tracks", "clips"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "timelineId": { "type": "string", "pattern": "^timeline_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "revision": { "type": "integer", "minimum": 0 },
+    "timelineHash": { "type": "string", "pattern": "^sha256:" },
+    "durationMs": { "type": "integer", "minimum": 0 },
+    "tracks": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/track" } },
+    "clips": { "type": "array", "items": { "$ref": "#/$defs/clip" } },
+    "mix": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gainDbByTrack": { "type": "object", "additionalProperties": { "type": "number" } },
+        "ducking": { "type": "object", "additionalProperties": true }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trackId", "kind", "role"],
+      "properties": {
+        "trackId": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["video", "audio", "overlay"] },
+        "role": { "type": "string", "minLength": 1 }
+      }
+    },
+    "clip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clipId", "assetId", "trackId", "kind", "sourceInMs", "sourceOutMs", "timelineStartMs", "timelineEndMs", "speed", "opacity"],
+      "properties": {
+        "clipId": { "$ref": "#/$defs/id" },
+        "assetId": { "$ref": "#/$defs/id" },
+        "trackId": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["video", "audio", "image", "graphic", "caption", "effect"] },
+        "sourceInMs": { "type": "integer", "minimum": 0 },
+        "sourceOutMs": { "type": "integer", "minimum": 0 },
+        "timelineStartMs": { "type": "integer", "minimum": 0 },
+        "timelineEndMs": { "type": "integer", "minimum": 0 },
+        "speed": { "type": "number", "exclusiveMinimum": 0 },
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "sourceUri": { "type": "string" },
+        "sourceHash": { "type": "string", "pattern": "^sha256:" },
+        "audioPolicy": { "$ref": "audio-policy.schema.json" },
+        "captions": { "type": "array", "items": { "$ref": "caption.schema.json" } },
+        "effects": { "type": "array" },
+        "transitionIn": { "type": ["object", "null"] },
+        "transitionOut": { "type": ["object", "null"] },
+        "renderRole": { "type": "string" },
+        "styleRef": { "type": "string" },
+        "candidateId": { "type": "string", "minLength": 1 },
+        "mustIncludeRefs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "layout": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y", "width", "height"],
+          "properties": {
+            "x": { "type": "number", "minimum": 0, "maximum": 1 },
+            "y": { "type": "number", "minimum": 0, "maximum": 1 },
+            "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    }
+  }
+}

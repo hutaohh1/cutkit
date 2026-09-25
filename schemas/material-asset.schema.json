@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/material-asset.schema.json",
+  "title": "CutKit Project Material Asset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assetId", "kind", "synthetic", "uri", "contentHash", "roles", "allowedRoles", "prohibitedRoles", "rights", "provenance"],
+  "properties": {
+    "assetId": { "type": "string", "pattern": "^asset_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "kind": { "enum": ["REAL", "SYNTHETIC_PROCEDURAL", "SYNTHETIC_GENERATED"] },
+    "synthetic": { "type": "boolean" },
+    "uri": { "type": "string", "minLength": 1 },
+    "contentHash": { "type": "string", "pattern": "^sha256:" },
+    "roles": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "allowedRoles": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "prohibitedRoles": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["durationMs", "fps", "width", "height", "hasAudio"],
+      "properties": {
+        "durationMs": { "type": "integer", "minimum": 0 },
+        "fps": { "type": "number", "exclusiveMinimum": 0 },
+        "width": { "type": "integer", "minimum": 0 },
+        "height": { "type": "integer", "minimum": 0 },
+        "hasAudio": { "type": "boolean" }
+      }
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "license", "consentRefs"],
+      "properties": {
+        "status": { "enum": ["cleared", "pending", "restricted", "unknown"] },
+        "license": { "type": "string", "minLength": 1 },
+        "consentRefs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["source", "ingestedAt"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "ingestedAt": { "type": ["string", "integer"] },
+        "method": { "type": "string" },
+        "tool": { "type": "string" },
+        "model": { "type": "string" },
+        "modelVersion": { "type": "string" },
+        "recipeHash": { "type": "string", "pattern": "^sha256:" },
+        "prompt": { "type": "string" },
+        "negativePrompt": { "type": "string" },
+        "inputRefs": { "type": "array", "items": { "type": "string" } },
+        "parameters": { "type": "object" }
+      }
+    }
+  }
+}

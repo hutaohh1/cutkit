@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/capability.schema.json",
+  "title": "CutKit Capability",
+  "type": "object",
+  "required": ["capabilityId", "kind", "status", "implementation", "renderer", "version", "timeContract", "fallback", "testVectors"],
+  "properties": {
+    "capabilityId": { "type": "string", "pattern": "^capability_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "kind": { "enum": ["effect", "transition", "motion", "text", "audio", "asset"] },
+    "status": { "enum": ["documented", "verified", "missing", "blocked", "failed", "unknown"] },
+    "implementation": { "type": "string", "minLength": 1 },
+    "renderer": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "minLength": 1 },
+    "timeContract": { "type": "string", "minLength": 1 },
+    "fallback": { "type": ["string", "null"] },
+    "testVectors": { "type": "array", "items": { "type": "string" } }
+  }
+}

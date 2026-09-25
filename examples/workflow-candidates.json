@@ -1,0 +1,28 @@
+[
+  {
+    "candidateId": "cand_founder_001",
+    "assetId": "asset_01a0d901-8a8e-7889-8c01-2e9ec58d7655",
+    "sourceInMs": 0,
+    "sourceOutMs": 12000,
+    "recommendedInMs": 1000,
+    "recommendedOutMs": 9000,
+    "roles": ["founder_interview"],
+    "tags": ["interview"],
+    "scores": { "technical": 0.95, "relevance": 0.98, "continuity": 0.9, "safety": 1 },
+    "qualityFlags": [],
+    "confidence": 0.96
+  },
+  {
+    "candidateId": "cand_particles_001",
+    "assetId": "asset_01a0d901-8a8e-7f43-a843-fcd13e02e5b5",
+    "sourceInMs": 0,
+    "sourceOutMs": 3000,
+    "recommendedInMs": 500,
+    "recommendedOutMs": 2500,
+    "roles": ["transition"],
+    "tags": ["particles"],
+    "scores": { "technical": 0.9, "relevance": 0.92, "continuity": 0.85, "safety": 1 },
+    "qualityFlags": [],
+    "confidence": 0.93
+  }
+]

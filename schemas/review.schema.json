@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/review.schema.json",
+  "title": "CutKit Structured Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "reviewId", "revision", "round", "actor", "createdAt", "dimensions", "observations", "summary"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "reviewId": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,63}$" },
+    "revision": { "type": "integer", "minimum": 0 },
+    "round": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "actor": { "type": "string", "minLength": 1 },
+    "createdAt": { "type": ["string", "integer"] },
+    "dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["factuality", "intent_coverage", "structure", "pacing", "av_quality", "continuity", "material_policy"] }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["observationId", "dimension", "severity", "issue", "suggestedChange"],
+        "properties": {
+          "observationId": { "type": "string", "minLength": 1 },
+          "dimension": { "enum": ["factuality", "intent_coverage", "structure", "pacing", "av_quality", "continuity", "material_policy"] },
+          "severity": { "enum": ["info", "warning", "blocking"] },
+          "clipId": { "type": "string" },
+          "startMs": { "type": "integer", "minimum": 0 },
+          "endMs": { "type": "integer", "minimum": 1 },
+          "issue": { "type": "string", "minLength": 1 },
+          "suggestedChange": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "summary": { "type": "string", "minLength": 1 }
+  }
+}

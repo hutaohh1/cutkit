@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/render-plan.schema.json",
+  "title": "CutKit Render Plan",
+  "type": "object",
+  "required": ["schemaVersion", "planId", "timelineId", "revision", "editHash", "renderHash", "inputs", "stages", "outputs"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "planId": { "type": "string", "pattern": "^plan_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "timelineId": { "type": "string", "pattern": "^timeline_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "revision": { "type": "integer", "minimum": 0 },
+    "editHash": { "type": "string", "pattern": "^sha256:" },
+    "renderHash": { "type": "string", "pattern": "^sha256:" },
+    "inputs": { "type": "array" },
+    "stages": { "type": "array" },
+    "outputs": { "type": "array" },
+    "environment": { "type": "object" },
+    "warnings": { "type": "array" }
+  }
+}

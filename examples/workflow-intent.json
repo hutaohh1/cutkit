@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "targetDurationMs": 10000,
+  "durationToleranceMs": 500,
+  "aspectRatio": "16:9",
+  "style": {
+    "tone": "documentary",
+    "pacing": "measured",
+    "visualTreatment": "natural"
+  },
+  "structureTemplate": "hook_body_end",
+  "mustInclude": [
+    { "id": "mi_founder", "type": "shot_role", "value": "founder_interview", "blocking": true },
+    { "id": "mi_transition", "type": "tag", "value": "particles", "blocking": true }
+  ],
+  "avoid": [],
+  "materialPolicy": {
+    "minRealScreenTimePercent": 80,
+    "maxProceduralScreenTimePercent": 25,
+    "maxGeneratedScreenTimePercent": 0,
+    "maxSyntheticTotalPercent": 30,
+    "allowSyntheticAboveLimit": false
+  },
+  "seed": 731922
+}

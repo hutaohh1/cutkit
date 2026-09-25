@@ -1,0 +1,20 @@
+{
+  "reviewId": "review_round_1",
+  "revision": 1,
+  "round": 1,
+  "actor": "human:reviewer",
+  "createdAt": "2026-09-25T11:00:00+08:00",
+  "dimensions": ["pacing"],
+  "observations": [
+    {
+      "observationId": "obs_pacing_001",
+      "dimension": "pacing",
+      "severity": "blocking",
+      "startMs": 0,
+      "endMs": 1000,
+      "issue": "Opening role label is missing",
+      "suggestedChange": "Update the render role label"
+    }
+  ],
+  "summary": "One blocking presentation issue"
+}

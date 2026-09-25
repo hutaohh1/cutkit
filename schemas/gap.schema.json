@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/gap.schema.json",
+  "title": "CutKit Gap",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["gapId", "kind", "requiredRole", "reason", "blocking", "policy"],
+  "properties": {
+    "gapId": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,63}$" },
+    "kind": { "enum": ["MISSING_REAL", "MISSING_COVERAGE", "POLICY_VIOLATION", "RIGHTS_REQUIRED"] },
+    "requiredRole": { "type": "string", "minLength": 1 },
+    "reason": { "type": "string", "minLength": 1 },
+    "blocking": { "type": "boolean" },
+    "policy": { "enum": ["REAL_REQUIRED", "AUXILIARY_ALLOWED", "BLOCKED", "HUMAN_REVIEW"] },
+    "mustIncludeRef": { "type": "string" },
+    "assetId": { "type": "string" },
+    "details": { "type": "object", "additionalProperties": true }
+  }
+}

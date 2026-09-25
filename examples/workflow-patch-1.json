@@ -1,0 +1,9 @@
+{
+  "reviewId": "review_round_1",
+  "actor": "human:editor",
+  "baseRevision": 1,
+  "operations": [
+    { "op": "replace", "path": "/clips/0/renderRole", "value": "founder_interview_opening" }
+  ],
+  "observationIds": ["obs_pacing_001"]
+}

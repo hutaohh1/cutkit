@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/forge-request.schema.json",
+  "title": "CutKit Material Forge Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "requestId", "gapId", "forge", "requestedRole", "durationMs", "parameters", "approvedBy"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "requestId": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,63}$" },
+    "gapId": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,63}$" },
+    "forge": { "enum": ["FORGE_A_PROCEDURAL", "FORGE_B_GENERATIVE"] },
+    "requestedRole": { "type": "string", "minLength": 1 },
+    "durationMs": { "type": "integer", "minimum": 1 },
+    "parameters": { "type": "object", "additionalProperties": true },
+    "approvedBy": { "type": ["string", "null"] }
+  }
+}

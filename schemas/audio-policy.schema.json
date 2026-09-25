@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/audio-policy.schema.json",
+  "title": "CutKit Audio Policy",
+  "type": "object",
+  "required": ["role", "gainDb"],
+  "properties": {
+    "role": { "enum": ["dialogue", "voiceover", "ambience", "music", "sfx"] },
+    "gainDb": { "type": "number" },
+    "targetLoudnessLufs": { "type": "number" },
+    "truePeakDbtp": { "type": "number" },
+    "maxClippingPercent": { "type": "number", "minimum": 0 },
+    "maxSilencePercent": { "type": "number", "minimum": 0 },
+    "maxDialogueMusicOverlapPercent": { "type": "number", "minimum": 0 },
+    "ducking": { "type": "object" }
+  }
+}

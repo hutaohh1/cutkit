@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/intent.schema.json",
+  "title": "CutKit Intent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "targetDurationMs", "durationToleranceMs", "aspectRatio", "style", "structureTemplate", "mustInclude", "avoid", "materialPolicy", "seed"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "targetDurationMs": { "type": "integer", "minimum": 1 },
+    "durationToleranceMs": { "type": "integer", "minimum": 0 },
+    "aspectRatio": { "enum": ["16:9", "9:16", "1:1", "4:5", "21:9"] },
+    "style": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["tone", "pacing", "visualTreatment"],
+      "properties": {
+        "tone": { "type": "string", "minLength": 1 },
+        "pacing": { "type": "string", "minLength": 1 },
+        "visualTreatment": { "type": "string", "minLength": 1 }
+      }
+    },
+    "structureTemplate": { "type": "string", "minLength": 1 },
+    "mustInclude": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "value", "blocking"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "type": { "enum": ["shot_role", "fact", "tag", "clip"] },
+          "value": { "type": "string", "minLength": 1 },
+          "blocking": { "type": "boolean" }
+        }
+      }
+    },
+    "avoid": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "value"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "type": { "enum": ["tag", "synthetic_person", "shot_role", "asset"] },
+          "value": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "materialPolicy": { "$ref": "#/$defs/materialPolicy" },
+    "seed": { "type": "integer", "minimum": 0 }
+  },
+  "$defs": {
+    "materialPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minRealScreenTimePercent", "maxProceduralScreenTimePercent", "maxGeneratedScreenTimePercent", "maxSyntheticTotalPercent", "allowSyntheticAboveLimit"],
+      "properties": {
+        "minRealScreenTimePercent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "maxProceduralScreenTimePercent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "maxGeneratedScreenTimePercent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "maxSyntheticTotalPercent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "allowSyntheticAboveLimit": { "type": "boolean" }
+      }
+    }
+  }
+}

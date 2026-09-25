@@ -1,0 +1,148 @@
+---
+title: CutKit v2.0 P0/P1/P2 完整架构总图
+---
+flowchart TB
+  classDef goal fill:#111827,stroke:#64748b,color:#f8fafc,stroke-width:1px
+  classDef data fill:#102a36,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px
+  classDef p0 fill:#123326,stroke:#34d399,color:#dcfce7,stroke-width:1px
+  classDef p1 fill:#173b24,stroke:#4ade80,color:#dcfce7,stroke-width:2px
+  classDef p2 fill:#3a2418,stroke:#fb923c,color:#ffedd5,stroke-width:1px
+  classDef layer fill:#172033,stroke:#818cf8,color:#e0e7ff,stroke-width:1px
+  classDef flow fill:#20252d,stroke:#64748b,color:#f8fafc,stroke-width:1px
+  classDef gate fill:#3a2418,stroke:#f97316,color:#ffedd5,stroke-width:2px
+  classDef warn fill:#401c24,stroke:#f43f5e,color:#ffe4e6,stroke-width:2px
+  classDef return fill:#26233b,stroke:#a78bfa,color:#ede9fe,stroke-width:1px
+
+  subgraph SEC_GOAL["一、目标与硬约束"]
+    direction LR
+    GOAL["A1 本地 CLI 垂直切片<br/>P0 编辑协议 · P1 真实媒体渲染"]:::goal
+    RULES["timeline.json 唯一执行真相<br/>原片只读 · 不默认上传<br/>缺失实拍不得静默伪造<br/>Skill 给方法，Core 负责执行与状态"]:::goal
+  end
+
+  subgraph SEC_DATA["二、核心数据"]
+    direction LR
+    CAP["capability registry<br/>documented / verified / missing<br/>native_editable / source_rebuildable"]:::data
+    TIMELINE["timeline.json<br/>源区间 ≠ 时间线区间<br/>speed / time_map / audio_policy"]:::data
+    INTENT["intent.json<br/>目标 / 风格 / must_include<br/>avoid / 结构模板 / seed"]:::data
+    HISTORY["history / events<br/>不可变 revision 快照<br/>因果审计"]:::data
+  end
+
+  subgraph SEC_P0["三、P0 已实现：编辑协议底座"]
+    direction TB
+    P0_SCHEMA["JSON Schema<br/>timeline / patch / lock / project"]:::p0
+    P0_ID["UUIDv7 稳定对象 ID<br/>timeline / track / clip / asset / lock"]:::p0
+    P0_PATCH["RFC 6902 Patch<br/>add / remove / replace<br/>move / copy / test"]:::p0
+    P0_LOCK["属性级锁<br/>路径锁 + objectId 锁<br/>TTL + actor 权限"]:::p0
+    P0_REV["乐观并发<br/>base_revision<br/>REVISION_CONFLICT"]:::p0
+    P0_STORE["原子写入<br/>history/*.json<br/>events.jsonl<br/>timeline.json"]:::p0
+  end
+
+  subgraph SEC_P1["四、P1 已实现：真实媒体执行"]
+    direction TB
+    P1_PROBE["ffprobe 媒体探测<br/>SHA-256 / duration / fps<br/>audio / color profile"]:::p1
+    P1_CAPTION["Caption → ASS → libass<br/>重叠 / 阅读速度 / 行长 QC"]:::p1
+    P1_AUDIO["真实音频 QC<br/>ebur128 / astats<br/>volumedetect / silencedetect"]:::p1
+    P1_RENDER["真实 FFmpeg Render<br/>trim / speed / scale / pad<br/>fade / opacity / concat"]:::p1
+    P1_HASH["RenderPlan + renderHash<br/>editHash / outputHash<br/>render manifest"]:::p1
+  end
+
+  subgraph SEC_LAYERS["五、五层架构"]
+    direction TB
+    L1["L1 入口层<br/>Skill + CLI / MCP<br/>同构 / 同参 / 同错误码"]:::layer
+    L2["L2 CutKit Core<br/>Application Service<br/>状态 / 权限 / 校验 / 恢复"]:::layer
+    L3["L3 Registry<br/>Effects / Transitions / Motion<br/>Fonts & Text / Audio / Assets"]:::layer
+    L4["L4 Render Plan<br/>媒体处理 + 局部动画<br/>Render 三路径"]:::layer
+    L5["L5 Review & Delivery<br/>试片 → 问题单 → Patch<br/>重检 → 批准 → 终稿"]:::layer
+  end
+
+  subgraph SEC_LOOP["六、制作闭环"]
+    direction TB
+    START["需求与素材"]:::flow
+    DOCTOR["doctor<br/>环境 / 权限 / 能力探测"]:::flow
+    INGEST["素材登记与按需分析"]:::flow
+    CAND["候选库<br/>叙事 / 情绪 / 声音<br/>连续性 / 技术质量"]:::flow
+    PLAN["叙事计划与声音策略<br/>edit_driver = speech / music / action / hybrid"]:::flow
+    GATE{"素材覆盖 Gate"}:::gate
+    MISSING["缺口码<br/>MISSING_REAL / MISSING_VOICEOVER<br/>MISSING_MUSIC / NEED_STYLE_ASSET"]:::warn
+    BUILD["Timeline Build<br/>timeline.json"]:::flow
+    VALIDATE["工程与权限校验"]:::flow
+    PREVIEW["Preview<br/>revision + style"]:::flow
+    REVIEW["实际视听评审<br/>工程 / 视听 / 人确认"]:::flow
+    PROBLEM["问题单 + 精确 Patch"]:::flow
+    APPROVE["批准工程快照<br/>revision + dependencies"]:::flow
+    FINAL["终稿 + 交付检查"]:::flow
+  end
+
+  subgraph SEC_RETURN["七、返回层对照"]
+    direction LR
+    R_FONT["字体缺字 / 换行<br/>→ 字体排版"]:::return
+    R_CLEAR["表达不清<br/>→ 叙事计划"]:::return
+    R_RENDER["导出崩溃<br/>→ 渲染任务与环境诊断"]:::return
+    R_SHOT["选错 / 重复<br/>→ 候选与组剪"]:::return
+    R_CUT["bad_cut<br/>→ 时间线"]:::return
+    R_AUDIO["BGM 压人声<br/>→ 音频自动化混音"]:::return
+  end
+
+  subgraph SEC_CAP["八、创作能力注册与渲染路径"]
+    direction TB
+    CONCEPT["概念拆分<br/>Effect / Transition / Motion<br/>Overlay / Compositing / Audio"]:::flow
+    EFFECTS["特效与转场来源<br/>FFmpeg 媒体原语<br/>参数化配方<br/>HTML / SVG / Canvas<br/>Shader / 素材包"]:::flow
+    TEXT_AUDIO["字体 / 字幕 / 音频<br/>事件 → ASS → libass<br/>dialogue / vo / ambience / music / sfx"]:::flow
+    RENDER3["Render 三路径<br/>原生媒体处理<br/>局部动画渲染<br/>局部复杂合成"]:::flow
+    EDITABILITY["可编辑性分级<br/>native_editable / source_rebuildable<br/>baked_media / unsupported"]:::flow
+  end
+
+  subgraph SEC_NEXT["九、后续优先级"]
+    direction LR
+    P1_LEFT["P1 收尾<br/>xfade / 多层 compositor<br/>Remotion / HyperFrames<br/>golden render fixtures"]:::p1
+    P2["P2 后续<br/>C2PA / 权利与同意<br/>OTIO / EDL / FCPXML<br/>外部编辑器交换"]:::p2
+  end
+
+  GOAL --> L1
+  RULES -.-> L2
+  INTENT --> P0_SCHEMA
+  TIMELINE --> P0_SCHEMA
+  HISTORY --> P0_STORE
+  CAP --> L3
+
+  P0_SCHEMA --> P0_ID --> P0_PATCH --> P0_LOCK --> P0_REV --> P0_STORE
+  P0_STORE --> TIMELINE
+  P0_REV -.->|revision 回溯| PROBLEM
+
+  L1 --> L2 --> L3 --> L4 --> L5
+  P1_PROBE --> L4
+  P1_CAPTION --> L4
+  P1_AUDIO --> L5
+  P1_RENDER --> L4
+  P1_HASH --> L5
+
+  START --> DOCTOR --> INGEST --> CAND --> PLAN --> GATE
+  GATE -->|缺失| MISSING
+  MISSING -->|补素材 / 改意图 / 明确降级| PLAN
+  GATE -->|通过| BUILD
+  BUILD --> VALIDATE --> PREVIEW --> REVIEW
+  REVIEW -->|需修改| PROBLEM
+  PROBLEM -->|base_revision + Patch| BUILD
+  REVIEW -->|通过| APPROVE --> FINAL
+
+  REVIEW -.-> R_FONT
+  REVIEW -.-> R_CLEAR
+  REVIEW -.-> R_RENDER
+  REVIEW -.-> R_SHOT
+  REVIEW -.-> R_CUT
+  REVIEW -.-> R_AUDIO
+
+  R_FONT --> TEXT_AUDIO
+  R_CLEAR --> PLAN
+  R_RENDER --> L4
+  R_SHOT --> CAND
+  R_CUT --> BUILD
+  R_AUDIO --> TEXT_AUDIO
+
+  CONCEPT --> EFFECTS --> RENDER3
+  CONCEPT --> TEXT_AUDIO
+  RENDER3 --> L4
+  CAP --> EDITABILITY
+  P1_RENDER --> P1_LEFT
+  L5 -.-> P2
+  P2 --> L5

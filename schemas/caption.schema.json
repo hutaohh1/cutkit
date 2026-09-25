@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/caption.schema.json",
+  "title": "CutKit Caption Cue",
+  "type": "object",
+  "required": ["cueId", "textId", "role", "startMs", "endMs", "content", "fontRole", "lineBreakPolicy"],
+  "properties": {
+    "cueId": { "type": "string", "pattern": "^cue_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "textId": { "type": "string", "pattern": "^text_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "role": { "enum": ["dialogue", "voiceover", "label", "annotation"] },
+    "startMs": { "type": "integer", "minimum": 0 },
+    "endMs": { "type": "integer", "minimum": 0 },
+    "content": { "type": "string", "minLength": 1 },
+    "fontRole": { "type": "string", "minLength": 1 },
+    "lineBreakPolicy": { "enum": ["preserve", "balance", "manual"] },
+    "captionTrack": { "type": "string" },
+    "safeArea": {
+      "type": "object",
+      "properties": {
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 },
+        "width": { "type": "number", "minimum": 0, "maximum": 1 },
+        "height": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}
+
+

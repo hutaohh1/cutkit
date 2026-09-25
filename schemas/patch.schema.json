@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/patch.schema.json",
+  "title": "CutKit Patch Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "baseRevision", "actor", "operations"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "baseRevision": { "type": "integer", "minimum": 0 },
+    "actor": { "type": "string", "minLength": 1 },
+    "operationId": { "type": "string" },
+    "lockIds": { "type": "array", "items": { "type": "string" } },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["op", "path"],
+        "properties": {
+          "op": { "enum": ["add", "remove", "replace", "move", "copy", "test"] },
+          "path": { "type": "string" },
+          "from": { "type": "string" },
+          "value": true
+        }
+      }
+    }
+  }
+}

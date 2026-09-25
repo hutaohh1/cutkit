@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/provenance.schema.json",
+  "title": "CutKit Provenance Manifest",
+  "type": "object",
+  "required": ["schemaVersion", "manifestId", "assetId", "contentHash", "integrityHash", "manifestHash", "source", "generation", "rightsIds", "consentIds", "disclosure", "edits", "previousManifestHash"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "manifestId": { "type": "string", "pattern": "^manifest_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "assetId": { "type": "string", "pattern": "^asset_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "contentHash": { "type": "string", "pattern": "^sha256:" },
+    "integrityHash": { "type": "string", "pattern": "^sha256:" },
+    "manifestHash": { "type": "string", "pattern": "^sha256:" },
+    "source": { "type": "object" },
+    "generation": { "type": "object" },
+    "rightsIds": { "type": "array", "items": { "type": "string" } },
+    "consentIds": { "type": "array", "items": { "type": "string" } },
+    "disclosure": { "enum": ["none", "ai_assisted", "ai_generated", "synthetic_procedural"] },
+    "edits": { "type": "array" },
+    "previousManifestHash": { "type": ["string", "null"], "pattern": "^sha256:" },
+    "createdAt": { "type": "integer" },
+    "signature": { "type": "object", "required": ["algorithm", "value"] }
+  }
+}
+

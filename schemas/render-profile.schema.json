@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/render-profile.schema.json",
+  "title": "CutKit Render Profile",
+  "type": "object",
+  "required": ["profileId", "width", "height", "fps", "videoCodec", "audioCodec", "pixelFormat", "reproducibility"],
+  "properties": {
+    "profileId": { "type": "string", "minLength": 1 },
+    "width": { "type": "integer", "minimum": 1 },
+    "height": { "type": "integer", "minimum": 1 },
+    "fps": { "type": "number", "exclusiveMinimum": 0 },
+    "videoCodec": { "type": "string", "minLength": 1 },
+    "audioCodec": { "type": "string", "minLength": 1 },
+    "pixelFormat": { "type": "string", "minLength": 1 },
+    "crf": { "type": "number" },
+    "reproducibility": { "enum": ["semantic", "visual", "pixel", "byte"] }
+  }
+}

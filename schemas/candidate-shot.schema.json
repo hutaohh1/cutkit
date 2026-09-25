@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/candidate-shot.schema.json",
+  "title": "CutKit Candidate Shot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["candidateId", "assetId", "sourceInMs", "sourceOutMs", "recommendedInMs", "recommendedOutMs", "roles", "tags", "scores", "qualityFlags", "confidence"],
+  "properties": {
+    "candidateId": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,63}$" },
+    "assetId": { "type": "string", "pattern": "^asset_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "sourceInMs": { "type": "integer", "minimum": 0 },
+    "sourceOutMs": { "type": "integer", "minimum": 1 },
+    "recommendedInMs": { "type": "integer", "minimum": 0 },
+    "recommendedOutMs": { "type": "integer", "minimum": 1 },
+    "roles": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "tags": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["technical", "relevance", "continuity", "safety"],
+      "properties": {
+        "technical": { "type": "number", "minimum": 0, "maximum": 1 },
+        "relevance": { "type": "number", "minimum": 0, "maximum": 1 },
+        "continuity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "safety": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "qualityFlags": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}

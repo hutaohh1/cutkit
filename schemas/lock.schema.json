@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cutkit.local/schemas/lock.schema.json",
+  "title": "CutKit Lock",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["lockId", "actor", "path", "acquiredAt", "expiresAt"],
+  "properties": {
+    "lockId": { "type": "string", "pattern": "^lock_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "actor": { "type": "string", "minLength": 1 },
+    "path": { "type": "string" },
+    "reason": { "type": "string" },
+    "acquiredAt": { "type": "integer" },
+    "expiresAt": { "type": "integer" }
+  }
+}
