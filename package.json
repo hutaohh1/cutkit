@@ -6,6 +6,9 @@
   "license": "MIT",
   "keywords": ["video", "ffmpeg", "captions", "timeline", "provenance", "qc", "cli"],
   "type": "module",
+  "repository": { "type": "git", "url": "git+https://github.com/hutaohh1/cutkit.git" },
+  "homepage": "https://github.com/hutaohh1/cutkit#readme",
+  "bugs": { "url": "https://github.com/hutaohh1/cutkit/issues" },
   "bin": {
     "cutkit": "./src/cli.mjs"
   },
